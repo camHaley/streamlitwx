@@ -17,9 +17,9 @@ def home_page():
 
     st.write('Made by Cameron Haley for Intro to HCI w/Professor Greg Reis')
 
-    email = st.text_input('Enter your email to get daily skydiving weather updates')
+    email = st.text_input('Enter your email to get daily skydiving weather updates') # Requirement widget (1/5)
     if email:
-        st.success('Subscribed!')
+        st.success('Subscribed!') # Requirement Successbox (1/2)
 
 #########################################################################################################
 
@@ -32,7 +32,7 @@ def current_weather_page():
     # Pre-defined cities with prominent dropzones
     cities = ['Sebastian, Florida', 'Deland, Florida', 'Clewiston, Florida', 'Zephyrhills, Florida', 'Homestead, Florida', 'Lake Wales, Florida']
     
-    # REQUIREMENT: Widget (1/5) multiselect
+    # REQUIREMENT: Widget (2/5) multiselect
     selected_cities = st.multiselect("Select and compare the current weather conditions and see which dropzone is the best choice for jumping today.", cities)
 
     if selected_cities:
@@ -64,9 +64,9 @@ def current_weather_page():
                     columns[i].write(f"**Temperature**: {temp_fahrenheit:.1f} °F")
                     columns[i].write(f"**Chance of Rain**: {chance_of_rain}")
                 elif 'message' in data:
-                    columns[i].error(f"Error: {data['message']}")   # REQUIREMENT: Error Box (1/2)
+                    columns[i].error(f"Error: {data['message']}")   # REQUIREMENT: Error Box (2/2)
             else: 
-                columns[i].error(f"Invalid city: {city}. Please enter a valid city name.") # REQUIREMENT: Error Box (2/2)
+                columns[i].error(f"Invalid city: {city}. Please enter a valid city name.") 
 
 ######################################################################################################
 
@@ -87,7 +87,7 @@ def twelve_hour_forecasts_page():
 
     st.title("24 Hour Rain and Wind Speed Forecast in Florida Cities")
 
-    selected_city = st.radio("Select a city", list(cities_coords.keys()))
+    selected_city = st.radio("Select a city", list(cities_coords.keys())) # Requirement Widget (3/5) 
 
     lat, lon = cities_coords[selected_city]
 
@@ -121,18 +121,18 @@ def twelve_hour_forecasts_page():
 
     st.write('Likelihood of rain over the next 24 hours in', selected_city)
     # Create the line chart for rain
-    st.line_chart(df['Chance of precipitation'])
+    st.line_chart(df['Chance of precipitation']) # Requirement Line Chart (1/2)
 
     st.write('Probability of Precipitation over the next twelve hours. (1.0 = 100 percent chance)')
 
     st.write('Wind speed (mph) over the next 24 hours in', selected_city)
     # Create the bar chart for wind speed
-    st.bar_chart(df['Wind Speed (mph)'])
+    st.bar_chart(df['Wind Speed (mph)']) # Requirement bar Chart (2/2)
 
     # Checkbox and Multi-select widget
-    detailed_forecast = st.button('Detailed Forecast Table')
+    detailed_forecast = st.button('Detailed Forecast Table') # Requirement : Button Widget
     if detailed_forecast:
-        options = ['Wind Speed (mph)', 'Wind Gust', 'Temperature (F)', 'Feels Like (F)', 'Humidity (%)', 'Visibility (miles)', 'Clouds (%)']
+        options = ['Wind Speed (mph)', 'Wind Gust', 'Temperature (F)', 'Feels Like (F)', 'Humidity (%)', 'Visibility (miles)', 'Clouds (%)'] # Requirement : Interactive Table 
         selected_options = st.multiselect("Select categories for detailed forecast", options, default=options)
         # Filter the dataframe to include only the selected columns and display as a table
         st.table(df[['dt'] + selected_options])
